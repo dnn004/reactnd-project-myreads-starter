@@ -21,11 +21,11 @@ class SearchPage extends React.Component {
     BooksAPI.search(query.trim())
       .then((books) => {
         if(Array.isArray(books)){
-          let all_books = this.props.books
+          let allBooks = this.props.books
           for(let i = 0; i < books.length; i++){
-            let book_index = all_books.findIndex(book => book['id'] === books[i]['id'])
-            if(book_index !== -1){
-              let book_updated = all_books[book_index]
+            let bookIndex = allBooks.findIndex(book => book['id'] === books[i]['id'])
+            if(bookIndex !== -1){
+              let book_updated = allBooks[bookIndex]
               books[i]['shelf'] = book_updated['shelf']
             } else {
               books[i]['shelf'] = "none"
@@ -53,7 +53,13 @@ class SearchPage extends React.Component {
 
     let books = this.props.books
     let bookIndex = books.findIndex(book => book['id'] === bookID)
-    books[bookIndex]['shelf'] = shelf
+    if(bookIndex === -1){
+      let newBook = booksSearch.find(book => book['id'] === bookID)
+      newBook['shelf'] = shelf
+      books.push(newBook)
+    } else {
+      books[bookIndex]['shelf'] = shelf
+    }
     this.props.onChange(books)
   }
 
