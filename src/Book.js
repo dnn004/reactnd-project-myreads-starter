@@ -14,10 +14,6 @@ class Book extends React.Component {
     // values[0] is the book's shelf
     const values = e.target.value.split(' ')
     BooksAPI.update(values[1], values[0])
-
-    let book = this.props.book
-    book['shelf'] = values[0]
-
     this.props.onChange(values[1], values[0])
   }
 

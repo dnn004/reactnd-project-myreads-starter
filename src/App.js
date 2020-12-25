@@ -2,8 +2,8 @@ import React from 'react'
 import './App.css'
 import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-import Books from './Books'
-import Search from './Search'
+import MainPage from './MainPage'
+import SearchPage from './SearchPage'
 
 class BooksApp extends React.Component {
   state={
@@ -30,10 +30,10 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path="/">
-          <Books books={books} onChange={(books) => this.updateBooks(books)}/>
+          <MainPage books={books} onChange={(books) => this.updateBooks(books)}/>
         </Route>
         <Route exact path="/search">
-          <Search books={books} onChange={(books) => this.updateBooks(books)}/>
+          <SearchPage books={books} onChange={(books) => this.updateBooks(books)}/>
         </Route>
       </div>
     )

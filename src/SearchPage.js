@@ -1,9 +1,10 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
+import { Link } from 'react-router-dom'
 import './App.css'
 import Book from './Book'
 
-class Search extends React.Component {
+class SearchPage extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -14,7 +15,7 @@ class Search extends React.Component {
 
   updateQuery = (query) => {
     this.setState(()=> ({
-      query: query.trim()
+      query: query
     }))
 
     BooksAPI.search(query.trim())
@@ -34,16 +35,25 @@ class Search extends React.Component {
           this.setState(() => ({
             books: books
           }))
+        } else {
+          this.setState(() => ({
+            books: []
+          }))
         }
       })
   }
 
   updateBooks = (bookID, shelf) => {
+    let books_search = this.state.books
+    let book_search_index = books_search.findIndex(book => book['id'] === bookID)
+    books_search[book_search_index]['shelf'] = shelf
+    this.setState(() => ({
+      books: books_search
+    }))
+
     let books = this.props.books
-    let book_index = this.state.books.findIndex(book => book['id'] === bookID)
-    let book_updated = books[book_index]
-    book_updated['shelf'] = shelf
-    books[book_index] = book_updated
+    let book_index = books.findIndex(book => book['id'] === bookID)
+    books[book_index]['shelf'] = shelf
     this.props.onChange(books)
   }
 
@@ -51,7 +61,13 @@ class Search extends React.Component {
     const books = this.state.books
     return (
       <div className="search">
-        <div>
+        <div className="to-main-page">
+          <Link
+            to='/'
+            style={{ textDecoration: 'none' }}
+          >Main Page</Link>
+        </div>
+        <div className="search-books-bar">
           <input
             type='text'
             placeholder='Search Books'
@@ -59,19 +75,20 @@ class Search extends React.Component {
             onChange={(event) => this.updateQuery(event.target.value)}
           />
         </div>
-        {books ?
-          <ol className="books-grid">
-            {books.map((book =>
-              <li key={book['id']}>
-                <Book book={book} onChange={(bookID, shelf) => this.updateBooks(bookID, shelf)}>
-                </Book>
-              </li>
-            ))}
-          </ol>
-        :''}
+        <div className="search-books-results">
+          {books ?
+            <ol className="books-grid" style={{justifyContent: 'left'}}>
+              {books.map((book =>
+                <li key={book['id']}>
+                  <Book book={book} onChange={(bookID, shelf) => this.updateBooks(bookID, shelf)} />
+                </li>
+              ))}
+            </ol>
+          :''}
+        </div>
       </div>
     )
   }
 }
 
-export default Search
+export default SearchPage

@@ -1,8 +1,9 @@
 import React from 'react'
 import './App.css'
 import BookShelf from './BookShelf'
+import { Link } from 'react-router-dom'
 
-class Books extends React.Component {
+class MainPage extends React.Component {
   updateShelf = (bookID, shelf) => {
     let books = this.props.books
     let book_index = books.findIndex(book => book['id'] === bookID)
@@ -23,15 +24,16 @@ class Books extends React.Component {
         <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
+            <Link
+                to='/search'
+                style={{ textDecoration: 'none', fontSize: '22px', color: 'black'}}
+              >Search Books</Link>
           </div>
           <div className="list-books-content">
             <div>
-              <BookShelf books={readingBooks} shelf={"Currently Reading"} onChange={(bookID, shelf) => this.updateShelf(bookID, shelf)}>
-              </BookShelf>
-              <BookShelf books={wantToBooks} shelf={"Want to Read"} onChange={(bookID, shelf) => this.updateShelf(bookID, shelf)}>
-              </BookShelf>
-              <BookShelf books={readBooks} shelf={"Read"} onChange={(bookID, shelf) => this.updateShelf(bookID, shelf)}>
-              </BookShelf>
+              <BookShelf books={readingBooks} shelf={"Currently Reading"} onChange={(bookID, shelf) => this.updateShelf(bookID, shelf)} />
+              <BookShelf books={wantToBooks} shelf={"Want to Read"} onChange={(bookID, shelf) => this.updateShelf(bookID, shelf)} />
+              <BookShelf books={readBooks} shelf={"Read"} onChange={(bookID, shelf) => this.updateShelf(bookID, shelf)} />
             </div>
           </div>
         </div>
@@ -43,4 +45,4 @@ class Books extends React.Component {
   }
 }
 
-export default Books
+export default MainPage
