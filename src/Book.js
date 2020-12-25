@@ -22,7 +22,7 @@ class Book extends React.Component {
     return (
       <div className="book">
         <div className="book-top">
-          {book['imageLinks'] && <div><img src={book['imageLinks']['thumbnail']} className="book-cover" alt="" style={{ width: 128, height: 193}}/></div>}
+          {book['imageLinks'] && <div><img src={book['imageLinks']['thumbnail']} className="book-cover" alt={book['imageLinks']['smallThumbnail']} style={{ width: 128, height: 193}}/></div>}
           <div className="book-shelf-changer">
             <select onChange={this.chooseShelf} value={book['shelf'] + " " + book['id']}>
               <option value="move" disabled>Move to...</option>

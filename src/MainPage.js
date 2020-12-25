@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom'
 class MainPage extends React.Component {
   updateShelf = (bookID, shelf) => {
     let books = this.props.books
-    let book_index = books.findIndex(book => book['id'] === bookID)
-    let book_updated = books[book_index]
-    book_updated['shelf'] = shelf
-    books[book_index] = book_updated
+    let bookIndex = books.findIndex(book => book['id'] === bookID)
+    let bookUpdated = books[bookIndex]
+    bookUpdated['shelf'] = shelf
+    books[bookIndex] = bookUpdated
 
     this.props.onChange(books)
   }
@@ -26,7 +26,7 @@ class MainPage extends React.Component {
             <h1>MyReads</h1>
             <Link
                 to='/search'
-                style={{ textDecoration: 'none', fontSize: '22px', color: 'black'}}
+                style={{ textDecoration: "none", fontSize: "22px", color: "black"}}
               >Search Books</Link>
           </div>
           <div className="list-books-content">

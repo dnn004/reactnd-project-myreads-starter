@@ -44,16 +44,16 @@ class SearchPage extends React.Component {
   }
 
   updateBooks = (bookID, shelf) => {
-    let books_search = this.state.books
-    let book_search_index = books_search.findIndex(book => book['id'] === bookID)
-    books_search[book_search_index]['shelf'] = shelf
+    let booksSearch = this.state.books
+    let bookSearchIndex = booksSearch.findIndex(book => book['id'] === bookID)
+    booksSearch[bookSearchIndex]['shelf'] = shelf
     this.setState(() => ({
-      books: books_search
+      books: booksSearch
     }))
 
     let books = this.props.books
-    let book_index = books.findIndex(book => book['id'] === bookID)
-    books[book_index]['shelf'] = shelf
+    let bookIndex = books.findIndex(book => book['id'] === bookID)
+    books[bookIndex]['shelf'] = shelf
     this.props.onChange(books)
   }
 
@@ -64,20 +64,20 @@ class SearchPage extends React.Component {
         <div className="to-main-page">
           <Link
             to='/'
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: "none" }}
           >Main Page</Link>
         </div>
         <div className="search-books-bar">
           <input
-            type='text'
-            placeholder='Search Books'
+            type="text"
+            placeholder="Search Books"
             value={this.state.query}
             onChange={(event) => this.updateQuery(event.target.value)}
           />
         </div>
         <div className="search-books-results">
           {books ?
-            <ol className="books-grid" style={{justifyContent: 'left'}}>
+            <ol className="books-grid" style={{justifyContent: "left"}}>
               {books.map((book =>
                 <li key={book['id']}>
                   <Book book={book} onChange={(bookID, shelf) => this.updateBooks(bookID, shelf)} />
