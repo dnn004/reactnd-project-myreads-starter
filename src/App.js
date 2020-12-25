@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import MainPage from './MainPage'
 import SearchPage from './SearchPage'
+import { BrowserRouter } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state={
@@ -28,6 +29,7 @@ class BooksApp extends React.Component {
   render() {
     const books = this.state.books
     return (
+      <BrowserRouter>
       <div className="app">
         <Route exact path="/">
           <MainPage books={books} onChange={(books) => this.updateBooks(books)}/>
@@ -36,6 +38,7 @@ class BooksApp extends React.Component {
           <SearchPage books={books} onChange={(books) => this.updateBooks(books)}/>
         </Route>
       </div>
+      </BrowserRouter>
     )
   }
 }
