@@ -12,8 +12,8 @@ const headers = {
   'Authorization': token
 }
 
-export const get = (bookId) =>
-  fetch(`${api}/books/${bookId}`, { headers })
+export const get = (bookID) =>
+  fetch(`${api}/books/${bookID}`, { headers })
     .then(res => res.json())
     .then(data => data.book)
 
@@ -22,8 +22,8 @@ export const getAll = () =>
     .then(res => res.json())
     .then(data => data.books)
 
-export const update = (book, shelf) =>
-  fetch(`${api}/books/${book.id}`, {
+export const update = (bookID, shelf) =>
+  fetch(`${api}/books/${bookID}`, {
     method: 'PUT',
     headers: {
       ...headers,
