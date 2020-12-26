@@ -35,6 +35,7 @@ class MainPage extends React.Component {
                   books={books.filter((book) => (book['shelf'] === shelf['id']))}
                   title={shelf.title}
                   onChange={(bookID, shelf) => this.updateShelf(bookID, shelf)}
+                  key={shelf['id']}
                 />
               ))}
             </div>
